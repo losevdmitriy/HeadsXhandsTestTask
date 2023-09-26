@@ -7,19 +7,18 @@ abstract class Creature {
     private static final int MAX_ATTACK_AND_DAMAGE_VALUE = 30;
     private static final int DICE_SIDES = 6;
     private static final int MIN_SUCCESS_ROLL = 5;
-    private Random random = new Random();
+    private final Random random = new Random();
 
-    private String name;
-    private int attack;
-    private int defense;
+    private final String name;
+    private final int attack;
+    private final int defense;
     private int health;
-    private int minDamage;
-    private int maxDamage;
+    private final int minDamage;
+    private final int maxDamage;
     private final int maxHealth;
 
     public Creature(String name, int attack, int defense, int health, int minDamage, int maxDamage) {
-        if (isValidAttributeValue(attack, MIN_ATTACK_AND_DAMAGE_VALUE, MAX_ATTACK_AND_DAMAGE_VALUE) &&
-                isValidAttributeValue(defense, MIN_ATTACK_AND_DAMAGE_VALUE, MAX_ATTACK_AND_DAMAGE_VALUE)) {
+        if (isValidAttributeValue(attack) && isValidAttributeValue(defense)) {
             this.name = name;
             this.attack = attack;
             this.defense = defense;
@@ -73,7 +72,6 @@ abstract class Creature {
     }
 
 
-
     protected int calculateAttackModifier(Creature target) {
         return attack - target.defense + 1;
     }
@@ -93,7 +91,7 @@ abstract class Creature {
         return random.nextInt(maxDamage - minDamage + 1) + minDamage;
     }
 
-    private boolean isValidAttributeValue(int value, int min, int max) {
-        return value >= min && value <= max;
+    private boolean isValidAttributeValue(int value) {
+        return value >= MIN_ATTACK_AND_DAMAGE_VALUE && value <= MAX_ATTACK_AND_DAMAGE_VALUE;
     }
 }
