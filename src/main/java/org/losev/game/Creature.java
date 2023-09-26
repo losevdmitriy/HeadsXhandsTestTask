@@ -81,10 +81,10 @@ abstract class Creature {
         for (int i = 0; i < numDice; i++) {
             int roll = random.nextInt(DICE_SIDES) + 1;
             if (roll >= MIN_SUCCESS_ROLL) {
-                return true; // Успешный удар
+                return true;
             }
         }
-        return false; // Удар неудачен
+        return false;
     }
 
     protected int calculateDamage() {
